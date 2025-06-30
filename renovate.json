@@ -2,21 +2,26 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
-      "matchPackageNames": ["ghcr.io/dexidp/dex"],
+      "matchPackageNames": [
+        "ghcr.io/dexidp/dex"
+      ],
       "enabled": true,
       "groupName": "dex-automated-updates",
       "postUpgradeTasks": {
-        "commands": ["make codegen-local"],
+        "commands": [
+          "make codegen-local"
+        ],
         "executionMode": "branch"
       }
     }
   ],
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": [
-        "manifests/*.yaml",
-        "manifests/*.yml",
-        ".github/workflows/*.yaml"
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/manifests/*.yaml/",
+        "/manifests/*.yml/",
+        "/.github/workflows/*.yaml/"
       ],
       "matchStrings": [
         "image:\\s*(?:['\"])?ghcr\\.io/dexidp/dex:v?(?<currentValue>[\\d.]+)(?:['\"])?",
